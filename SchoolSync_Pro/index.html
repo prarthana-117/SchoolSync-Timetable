@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10162f">
+<title>SchoolSync — Smart School Operations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#" data-page="dashboard"><span class="brand-icon"><svg viewBox="0 0 32 32"><path d="M5 9.5 16 4l11 5.5v13L16 28 5 22.5z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m10 16 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>SchoolSync</b><small>SMART SCHOOL OPS</small></span></a>
+    <div class="school-card"><div class="school-logo">NS</div><div class="school-text"><b>Northstar Academy</b><small>Admin workspace</small></div><span class="caret">⌄</span></div>
+    <div class="nav-label">WORKSPACE</div>
+    <nav class="nav">
+      <button class="nav-link active" data-page="dashboard"><span class="nav-ico">◫</span>Overview</button>
+      <button class="nav-link" data-page="timetable"><span class="nav-ico">▦</span>Timetable</button>
+      <button class="nav-link" data-page="substitutions"><span class="nav-ico">⇄</span>Substitution Agent <span class="nav-badge" id="openBadge">2</span></button>
+      <button class="nav-link" data-page="teachers"><span class="nav-ico">♙</span>Teachers</button>
+      <button class="nav-link" data-page="reports"><span class="nav-ico">▤</span>Reports & Analytics</button>
+    </nav>
+    <div class="sidebar-spacer"></div>
+    <div class="agent-live"><span class="live-dot"></span><div><b>Agent online</b><small>Matching engine ready</small></div><span class="live-spark">✦</span></div>
+    <div class="profile"><div class="profile-pic">PA</div><div class="profile-meta"><b>School Admin</b><small>Administrator</small></div><button id="profileBtn" class="icon-plain" title="Profile details">···</button></div>
+    <div class="sidebar-foot">SCHOOLSYNC <span>v1.2 DEMO</span></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><button id="menuBtn" class="mobile-menu" aria-label="Open menu">☰</button><div class="breadcrumbs"><span>Workspace</span><i>/</i><b id="breadcrumb">Overview</b></div><div class="topbar-right"><div class="today-chip"><span>◷</span><span id="todayDate">Today</span></div><button class="round-help" id="helpBtn" title="Help">?</button><div class="top-user">PA</div></div></header>
+    <section class="page active" id="page-dashboard">
+      <div class="hero-row"><div><div class="eyebrow"><span class="eyebrow-dot"></span> TUESDAY · SCHOOL OPERATIONS</div><h1>Your school day,<br><em>in sync.</em></h1><p class="subheading">A clearer view of schedules, staff availability and classroom coverage.</p></div><div class="hero-actions"><button class="btn btn-light" data-action="export">↧ Export report</button><button class="btn btn-primary" data-action="new-absence"><span>＋</span> Report absence</button></div></div>
+      <div class="metric-grid">
+        <article class="metric"><div class="metric-head"><span class="metric-icon purple">▦</span><span class="metric-kicker">TODAY</span></div><div class="metric-value" id="metricPeriods">16</div><div class="metric-label">Scheduled periods</div><div class="metric-bottom"><span class="metric-line purple-line"><i style="width:78%"></i></span><span>Across 5 grades</span></div></article>
+        <article class="metric"><div class="metric-head"><span class="metric-icon amber">♙</span><span class="metric-kicker warning-kicker">ACTION NEEDED</span></div><div class="metric-value" id="metricOpen">2</div><div class="metric-label">Coverage requests open</div><div class="metric-bottom"><span class="status-dot amber-dot"></span><span>Needs admin review</span></div></article>
+        <article class="metric"><div class="metric-head"><span class="metric-icon mint">✓</span><span class="metric-kicker success-kicker">COVERAGE</span></div><div class="metric-value" id="metricCoverage">71<span class="metric-percent">%</span></div><div class="metric-label">Requests covered</div><div class="metric-bottom"><span class="metric-line mint-line"><i id="coverageLine" style="width:71%"></i></span><span id="coverageCaption">5 of 7 periods</span></div></article>
+        <article class="metric"><div class="metric-head"><span class="metric-icon blue">✧</span><span class="metric-kicker">STAFF</span></div><div class="metric-value" id="metricTeachers">12</div><div class="metric-label">Teachers in directory</div><div class="metric-bottom"><span class="status-dot green-dot"></span><span>Availability monitored</span></div></article>
+      </div>
+      <div class="dashboard-grid">
+        <section class="surface timetable-preview"><div class="section-head"><div><div class="section-eyebrow">YOUR DAY AT A GLANCE</div><h2>Today's timetable</h2><p>Keep every classroom moving.</p></div><button class="link-btn" data-page="timetable">Full timetable <span>↗</span></button></div><div id="dashboardSchedule" class="schedule-list"></div><div class="panel-bottom"><span class="tiny-legend"><i class="legend-dot purple-bg"></i> Scheduled</span><span class="tiny-legend"><i class="legend-dot amber-bg"></i> Needs cover</span><span class="tiny-legend"><i class="legend-dot mint-bg"></i> Covered</span></div></section>
+        <section class="surface agent-card"><div class="agent-top"><div class="agent-orb">✦</div><div><div class="section-eyebrow">SCHOOLSYNC INTELLIGENCE</div><h2>Substitution Agent</h2></div><span class="online-pill"><i></i> LIVE</span></div><div class="agent-message"><div class="agent-message-icon">✦</div><div><b id="agentHeadline">2 classes need coverage</b><p id="agentSummary">We found eligible teachers for your open requests. Review the best matches and assign with one click.</p></div></div><div class="recommendations" id="dashboardMatches"></div><button class="btn btn-primary wide-btn" data-page="substitutions">Open substitution workspace <span>→</span></button><div class="privacy-note"><span>ⓘ</span> Matches check period conflicts, subject fit and workload.</div></section>
+      </div>
+      <section class="surface activity-surface"><div class="section-head"><div><div class="section-eyebrow">LATEST UPDATES</div><h2>Recent activity</h2></div><button class="link-btn" data-page="reports">View all reports ↗</button></div><div id="activityFeed" class="activity-feed"></div></section>
+    </section>
+
+    <section class="page" id="page-timetable">
+      <div class="page-title-row"><div><div class="eyebrow">ACADEMIC PLANNING</div><h1>Timetable</h1><p class="subheading">Manage classroom schedules and prevent double-booking.</p></div><button class="btn btn-primary" data-action="add-period">＋ Add period</button></div>
+      <div class="toolbar"><label class="searchbox"><span>⌕</span><input id="scheduleSearch" placeholder="Search class, subject or teacher"></label><select id="scheduleDay" aria-label="Filter by day"><option>Tuesday</option><option>Monday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option></select><select id="scheduleClass" aria-label="Filter by class"><option value="all">All classes</option><option>Grade 8A</option><option>Grade 8B</option><option>Grade 9A</option><option>Grade 9B</option><option>Grade 10A</option></select></div>
+      <div class="surface table-surface"><div class="table-top"><div><h2>Class schedule</h2><p>Choose a day and filter the timetable.</p></div><span class="table-count" id="scheduleCount">16 entries</span></div><div class="table-scroll"><table><thead><tr><th>PERIOD</th><th>TIME</th><th>CLASS</th><th>SUBJECT</th><th>TEACHER</th><th>ROOM</th><th>STATUS</th><th></th></tr></thead><tbody id="scheduleRows"></tbody></table></div></div><p class="helper-text">Changes are saved in this browser. The demo uses sample school data.</p>
+    </section>
+
+    <section class="page" id="page-substitutions">
+      <div class="page-title-row"><div><div class="eyebrow">COVERAGE COORDINATION</div><h1>Substitution Agent</h1><p class="subheading">Find the right cover teacher without timetable conflicts.</p></div><button class="btn btn-primary" data-action="new-absence">＋ Report absence</button></div>
+      <div class="mini-metrics"><div class="mini-metric"><span class="mini-icon amber">♙</span><div><b id="subOpenCount">2 open requests</b><small>Awaiting assignment</small></div></div><div class="mini-metric"><span class="mini-icon mint">✓</span><div><b id="subAssignedCount">5 covered periods</b><small>Assigned today</small></div></div><div class="mini-metric"><span class="mini-icon purple">✦</span><div><b>Conflict-aware matching</b><small>Subject fit + availability + workload</small></div></div></div>
+      <div class="section-head request-head"><div><div class="section-eyebrow">NEEDS YOUR ATTENTION</div><h2>Coverage requests</h2><p>Review recommendations, compare alternatives and confirm assignments.</p></div><div class="filter-tabs"><button class="filter-tab active" data-filter="all">All requests</button><button class="filter-tab" data-filter="open">Needs cover</button><button class="filter-tab" data-filter="assigned">Assigned</button></div></div>
+      <div class="request-list" id="requestList"></div>
+      <div class="surface how-card"><div class="how-icon">✦</div><div class="how-copy"><h3>How the agent decides</h3><p>It excludes unavailable teachers, prioritizes subject expertise, balances daily workload and rechecks conflicts before an assignment is saved. A school admin remains in control of every final decision.</p></div><button class="btn btn-outline" data-action="run-agent">Run matching agent ↻</button></div>
+    </section>
+
+    <section class="page" id="page-teachers">
+      <div class="page-title-row"><div><div class="eyebrow">STAFF DIRECTORY</div><h1>Teachers</h1><p class="subheading">Subject expertise, workload and availability in one place.</p></div><button class="btn btn-primary" data-action="add-teacher">＋ Add teacher</button></div>
+      <div class="toolbar"><label class="searchbox"><span>⌕</span><input id="teacherSearch" placeholder="Search teacher or subject"></label><select id="teacherFilter"><option value="all">All teachers</option><option value="available">Available in Period 2</option><option value="busy">Busy in Period 2</option></select></div><div class="teacher-grid" id="teacherGrid"></div>
+    </section>
+
+    <section class="page" id="page-reports">
+      <div class="page-title-row"><div><div class="eyebrow">SCHOOL OPERATIONS</div><h1>Reports & Analytics</h1><p class="subheading">Track coverage, assignment history and staffing capacity.</p></div><button class="btn btn-primary" data-action="export">↧ Export CSV</button></div>
+      <div class="analytics-grid"><article class="surface analytics-card"><div class="analytics-top"><span class="metric-icon mint">✓</span><span class="soft-tag">TODAY</span></div><strong class="analytics-value" id="reportCoverage">71%</strong><b>Coverage rate</b><p>Share of substitution requests assigned.</p><div class="progress"><i id="reportProgress" style="width:71%"></i></div></article><article class="surface analytics-card"><div class="analytics-top"><span class="metric-icon amber">♙</span><span class="soft-tag amber-soft">REVIEW</span></div><strong class="analytics-value" id="reportOpen">2</strong><b>Open requests</b><p>Periods still waiting for an assignment.</p></article><article class="surface analytics-card"><div class="analytics-top"><span class="metric-icon purple">♙</span><span class="soft-tag">DIRECTORY</span></div><strong class="analytics-value" id="reportTeacherCount">12</strong><b>Teachers</b><p>Staff available to be considered by the agent.</p></article></div>
+      <section class="surface table-surface report-log"><div class="table-top"><div><h2>Substitution log</h2><p>Every request and its current assignment.</p></div><button class="btn btn-outline btn-small" data-action="reset-demo">Reset demo data</button></div><div class="table-scroll"><table><thead><tr><th>REQUEST</th><th>CLASS / SUBJECT</th><th>ABSENT TEACHER</th><th>SUBSTITUTE</th><th>REASON</th><th>STATUS</th></tr></thead><tbody id="reportRows"></tbody></table></div></section>
+    </section>
+    <footer class="main-footer"><span>© 2026 SchoolSync · School operations, simplified.</span><span><i class="live-dot"></i> Demo workspace is running locally</span></footer>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-header"><div><div class="eyebrow">SCHOOLSYNC WORKSPACE</div><h2 id="modalTitle">Add details</h2><p id="modalSubtitle">Complete the fields below.</p></div><button class="modal-close" id="modalClose" aria-label="Close dialog">×</button></div><form id="modalForm"><div class="modal-fields" id="modalFields"></div><div class="modal-error" id="modalError"></div><div class="modal-actions"><button type="button" class="btn btn-light" id="modalCancel">Cancel</button><button type="submit" class="btn btn-primary" id="modalSave">Save changes <span>→</span></button></div></form></section></div>
+<div class="toast" id="toast" role="status"><span class="toast-check">✓</span><span id="toastText">Saved</span></div>
+<script src="app.js"></script>
+</body></html>

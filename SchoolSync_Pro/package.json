@@ -1,0 +1,9 @@
+{
+  "name": "schoolsync-pro-agent",
+  "version": "2.0.0",
+  "private": true,
+  "description": "School timetable and substitution agent prototype",
+  "scripts": {
+    "start": "npx serve ."
+  }
+}
